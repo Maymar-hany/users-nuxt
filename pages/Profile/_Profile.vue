@@ -1,0 +1,76 @@
+<template>
+
+      <div id="profile" class="column is-one-third
+is-offset-one-quarter">
+
+            <div class="section">
+                <div class="container">
+                 <div class="card">
+
+                  <div class="column is-offset-one-quarter">
+                    <div class="card-image">
+
+                  <figure class="image is-128x128">
+                    <img  :src="user.avatar" alt="User image">
+                  </figure>
+
+                </div>
+                    <div>
+                      <p class="title is-4">{{user.first_name}} {{user.last_name}} </p>
+                    </div>
+
+                     <div>
+                      <span class="icon-text">
+                        <span class="icon">
+                           <fa :icon="['fas', 'envelope']" />
+                        </span>
+                        <span>{{user.email}}</span>
+                      </span>
+                    </div>
+                  </div>
+
+                    </div>
+                </div>
+
+                  </div>
+                </div>
+
+</template>
+
+<script>
+
+
+
+export default {
+  name: 'Profile',
+  data () {
+    return {
+   Id: this.$route.params.Profile
+
+    }
+  },
+  props: {
+
+  },
+  created () {
+console.log(this.$route.params.Profile)
+  },
+
+  components: {
+    
+  },
+  methods: {
+
+  },
+  computed: {
+    user () {
+      return this.$store.getters.userData
+    }
+  }
+
+}
+</script>
+
+<style>
+
+</style>
