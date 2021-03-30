@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     deleteUser (user) {
-      this.$store.commit('DELETE_USER', user)
+      this.$store.commit('users/DELETE_USER', user)
     }
   }
 }

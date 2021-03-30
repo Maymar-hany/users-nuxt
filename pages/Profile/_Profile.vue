@@ -53,7 +53,7 @@ export default {
 
   },
   created () {
-console.log(this.$route.params.Profile)
+
   },
 
   components: {
@@ -64,7 +64,7 @@ console.log(this.$route.params.Profile)
   },
   computed: {
     user () {
-      return this.$store.getters.userData
+      return this.$store.getters['users/userData']
     }
   }
 

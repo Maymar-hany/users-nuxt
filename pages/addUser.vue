@@ -61,8 +61,8 @@ export default {
   methods: {
 
     add () {
-     this.newUser.id= this.$store.state.lastuser 
-    this.$store.dispatch('addUser',this.newUser)
+     this.newUser.id= this.$store.state.users.lastuser
+    this.$store.dispatch('users/addUser',this.newUser)
     this.$store.dispatch('notification/showMessage', 'Added successfully')
     this.$router.push({ name: 'UserList' })
     },

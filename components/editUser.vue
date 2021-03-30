@@ -69,7 +69,7 @@ export default {
     },
 
     edit () {
-      this.$store.commit('setData', {
+      this.$store.commit('users/UPDATE_USER', {
         name: 'user',
         data: this.newuser
       })
@@ -83,14 +83,14 @@ export default {
 
     ...mapGetters(
       [
-        'userData'
+        'users/userData'
       ]
     )
   },
 
   created () {
-    this.$store.dispatch('getUser', this.id)
-    this.newuser = Object.assign({}, this.$store.getters.userData)
+    this.$store.dispatch('users/getUser', this.id)
+    this.newuser = Object.assign({}, this.$store.getters['users/userData'])
   }
 }
 </script>

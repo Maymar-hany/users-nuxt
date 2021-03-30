@@ -91,13 +91,13 @@ export default {
     },
 
     getResource (page) {
-      this.TotalPages = this.$store.state.total
-      this.$store.commit('Current_Page', page)
-      this.$store.dispatch('loadUsers', this.$store.getters.getPage)
+      this.TotalPages = this.$store.state.users.total
+      this.$store.commit('users/CURRENT_PAGE', page)
+      this.$store.dispatch('users/loadUsers', this.$store.getters['users/getPage'])
       this.currentPage = page
     },
     viewProfile (userid) {
-      this.$store.dispatch('getUser', userid)
+      this.$store.dispatch('users/getUser', userid)
     }
 
   },
@@ -109,7 +109,7 @@ export default {
   computed: {
 
      users () {
-      return this.$store.getters.getUsers
+      return this.$store.getters['users/getUsers']
     } 
   }
 

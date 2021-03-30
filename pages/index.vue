@@ -81,9 +81,7 @@ export default {
     return {
 
       Email: '',
-      Password: '',
-     // token: localStorage.getItem('token')
-
+      Password: ''
     }
   },
   created () {
