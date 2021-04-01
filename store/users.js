@@ -6,7 +6,8 @@
     currentPage: '',
     lastuser:1,
     token:'',
-    open:false
+    openEdit:false,
+    openDelete:false,
     
 
   })
@@ -50,8 +51,11 @@
     ADD_TOKEN (state, payload) {
       state.token = payload
     },
-    OPEN_PAGE (state, payload) {
-      state.open = payload
+    OPEN_EDIT (state, payload) {
+      state.openEdit = payload
+    },
+    OPEN_DELETE (state, payload) {
+      state.openDelete = payload
     }
 
   }
@@ -77,8 +81,12 @@
     commit('ADD_TOKEN', payload)
    
   },
-  openPage({ commit }, payload) {
-    commit('OPEN_PAGE', payload)
+  openEdit({ commit }, payload) {
+    commit('OPEN_EDIT', payload)
+   
+  },
+  openDelete({ commit }, payload) {
+    commit('OPEN_DELETE', payload)
    
   }
  
@@ -100,8 +108,11 @@
     getPage: (state) => {
       return state.currentPage
     },
-    openPage: (state) => {
-      return state.open
+    openEdit: (state) => {
+      return state.openEdit
+    },
+    openDelete: (state) => {
+      return state.openDelete
     }
 
   }

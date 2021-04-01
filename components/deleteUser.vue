@@ -39,23 +39,23 @@ export default {
   methods: {
     deleteUser () {
       this.$store.commit('users/DELETE_USER', this.id)
-      this.$store.dispatch('users/openPage', !this.clicked)
+      this.$store.dispatch('users/openDelete', !this.clicked)
        this.$store.dispatch('notification/showMessage', 'Deleted successfully')
       this.clicked=false
     }, isClosed () {
-      this.$store.dispatch('users/openPage', !this.clicked)
+      this.$store.dispatch('users/openDelete', !this.clicked)
     },
   }, computed: {
 
     ...mapGetters(
       {      
-        openPage:'users/openPage'
+        openDelete:'users/openDelete'
       }
     )
   },
   watch:{
  
-  openPage(newvalue){
+  openDelete(newvalue){
     this.clicked= newvalue
      
   }

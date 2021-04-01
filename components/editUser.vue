@@ -64,7 +64,7 @@ export default {
   methods: {
     
     isClosed () {
-      this.$store.dispatch('users/openPage', !this.clicked)
+      this.$store.dispatch('users/openEdit', !this.clicked)
     },
 
     edit () {
@@ -73,7 +73,7 @@ export default {
         data: this.newuser
       })
 
-      this.$store.dispatch('users/openPage', !this.clicked)
+      this.$store.dispatch('users/openEdit', !this.clicked)
       this.$store.dispatch('notification/showMessage', 'saved successfully')
     }
 
@@ -83,7 +83,7 @@ export default {
     ...mapGetters(
       {      
         userdata:'users/userData',
-        openPage:'users/openPage'
+        openEdit:'users/openEdit'
       }
     )
   },
@@ -91,7 +91,7 @@ export default {
   userdata(newdata){
     this.newuser = Object.assign({}, newdata)
   },
-  openPage(newvalue){
+  openEdit(newvalue){
     this.clicked= newvalue
      
   }

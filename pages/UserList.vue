@@ -117,7 +117,7 @@ export default {
     editProfile (userid) {
       
       this.$store.dispatch('users/getUser', userid)
-       this.$store.dispatch('users/openPage', this.open)
+       this.$store.dispatch('users/openEdit', this.open)
       this.openEdit=true
       
       
@@ -125,7 +125,7 @@ export default {
     },
     deleteProfile(userid){
       this.userid=userid
-      this.$store.dispatch('users/openPage', this.open)
+      this.$store.dispatch('users/openDelete', this.open)
       this.openDelete=true
       
     }
