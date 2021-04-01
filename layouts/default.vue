@@ -7,7 +7,7 @@
 
 export default {
   created(){
-   // this.$store.dispatch('users/loadUsers', '1')
+   this.$store.dispatch('users/loadUsers', '1')
   }
 }
 </script>

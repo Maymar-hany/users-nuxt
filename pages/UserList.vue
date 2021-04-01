@@ -1,5 +1,8 @@
 <template>
   <div id="list" >
+    <Edit v-show="openEdit" />
+    <Delete v-show="openDelete" :id="this.userid" />
+
           <section class="hero is-primary is-align-items-center">
             <div class="hero-body">
               <p class="title">
@@ -11,23 +14,29 @@
             <section class="section">
                 <div class="column is-half
                       is-offset-one-fifth">
-                      <button class="button is-primary" >
-                          <nuxt-link :to="'/addUser'"> Add User</nuxt-link></button>
+                      
+                        <input id="search" class="input is-primary" type="text" v-model="search"  placeholder="Search Users By First Name">
+                          
                   <table class="table is-bordered is-striped is-narrow is-fullwidth">
                     <thead>
                       <tr>
                         <th >Id</th>
-                        <th>Users</th>
+                        <th>Users
+                           <button class="button is-primary" > 
+                          <nuxt-link :to="'/addUser'"> Add User</nuxt-link></button>
+                          </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr :key="user.id" v-for="user in users">
+                      <tr :key="user.id" v-for="user in searchUsers">
                         <td >{{user.id}}</td>
 
                         <td>{{user.first_name}} {{user.last_name}}
 
-                           <Delete :id="user.id" />
-                           <Edit :id="user.id" />
+                           <button class="button is-primary" @click="deleteProfile(user.id)" > Delete
+                          </button>
+                           <button class="button is-primary" @click="editProfile(user.id)" > Edit
+                          </button>
                            
 
                             <button class="button is-primary" @click="viewProfile(user.id)" >
@@ -55,8 +64,9 @@
 <script>
 import Edit from '../components/editUser'
 import Delete from '../components/deleteUser'
-
+import { mapGetters } from 'vuex'
 export default {
+  
   name: 'Userlist',
   components: {
     Edit,
@@ -71,7 +81,12 @@ export default {
 
       currentPage: 1,
       TotalPages: '',
-      first: 1
+      first: 1,
+      openEdit: false,
+      openDelete: false,
+      open:true,
+      userid:'',
+      search:''
 
     }
   },
@@ -93,24 +108,48 @@ export default {
     getResource (page) {
       this.TotalPages = this.$store.state.users.total
       this.$store.commit('users/CURRENT_PAGE', page)
-      this.$store.dispatch('users/loadUsers', this.$store.getters['users/getPage'])
+      this.$store.dispatch('users/loadUsers', this.getpage)
       this.currentPage = page
     },
     viewProfile (userid) {
       this.$store.dispatch('users/getUser', userid)
+    },
+    editProfile (userid) {
+      
+      this.$store.dispatch('users/getUser', userid)
+       this.$store.dispatch('users/openPage', this.open)
+      this.openEdit=true
+      
+      
+     
+    },
+    deleteProfile(userid){
+      this.userid=userid
+      this.$store.dispatch('users/openPage', this.open)
+      this.openDelete=true
+      
     }
 
   },
   created () {
    
-   
   },
 
   computed: {
 
-     users () {
-      return this.$store.getters['users/getUsers']
-    } 
+   ...mapGetters(
+      {      
+        users:'users/getUsers',
+        getpage:'users/getPage'
+      }), 
+       searchUsers(){
+                const lowercaseSearch = this.search.toLowerCase().trim()
+
+            return this.users.filter((user) => {
+                return user.first_name.toLowerCase().trim().match(lowercaseSearch)
+            });
+    
+        }
   }
 
 }
@@ -139,5 +178,8 @@ a.pagination-link{
 }
 a.pagination-link.is-current{
   color: #fff;
+}
+#search{
+  margin-bottom: 10px;
 }
 </style>

@@ -45,13 +45,13 @@ export default {
           password: this.Password
         }).then(function (response) {
         
-           
-             store.state.token = response.data.token
+           store.dispatch('users/userToken', response.data.token)
+           //  store.state.token = response.data.token
       
            
 
           if (store.state.token != null) {
-           
+           console.log(store.state.token)
             
             if (navigate.params.nextUrl != null) {
               nav.push(navigate.params.nextUrl)

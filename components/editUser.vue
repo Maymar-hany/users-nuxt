@@ -1,6 +1,6 @@
 <template>
   <div id="edit">
-<button class="button is-primary" @click="isActive"> Edit User </button>
+
 
     <div id="ID" :class="['modal', { 'is-active' : clicked }]">
   <div class="modal-background"></div>
@@ -47,7 +47,7 @@ export default {
   },
   data () {
     return {
-      clicked: false,
+      clicked: '',
       user: {
         first_name: '',
         last_name: '',
@@ -58,14 +58,13 @@ export default {
     }
   },
   props: {
-    id: Number
+    
+    
   },
   methods: {
-    isActive () {
-      this.clicked = true
-    },
+    
     isClosed () {
-      this.clicked = false
+      this.$store.dispatch('users/openPage', !this.clicked)
     },
 
     edit () {
@@ -74,7 +73,7 @@ export default {
         data: this.newuser
       })
 
-      this.clicked = false
+      this.$store.dispatch('users/openPage', !this.clicked)
       this.$store.dispatch('notification/showMessage', 'saved successfully')
     }
 
@@ -82,15 +81,27 @@ export default {
   computed: {
 
     ...mapGetters(
-      [
-        'users/userData'
-      ]
+      {      
+        userdata:'users/userData',
+        openPage:'users/openPage'
+      }
     )
+  },
+  watch:{
+  userdata(newdata){
+    this.newuser = Object.assign({}, newdata)
+  },
+  openPage(newvalue){
+    this.clicked= newvalue
+     
+  }
+  
   },
 
   created () {
-    this.$store.dispatch('users/getUser', this.id)
-    this.newuser = Object.assign({}, this.$store.getters['users/userData'])
+   // this.clicked= this.openPage
+   
+    
   }
 }
 </script>

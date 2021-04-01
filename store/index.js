@@ -6,7 +6,7 @@ export const mutations = {
   
 }
 export const actions = { 
-  nuxtServerInit ({ dispatch }) {
-    dispatch('users/loadUsers', '1')
+ async nuxtServerInit ({ dispatch }) {
+ await   dispatch('users/loadUsers', '1')
   }
 }

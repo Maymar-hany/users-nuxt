@@ -40,32 +40,15 @@ is-offset-one-quarter">
 <script>
 
 
-
+import { mapGetters } from 'vuex'
 export default {
-  name: 'Profile',
-  data () {
-    return {
-   Id: this.$route.params.Profile
-
-    }
-  },
-  props: {
-
-  },
-  created () {
-
-  },
-
-  components: {
-    
-  },
-  methods: {
-
-  },
+  
+  name: 'Profile', 
   computed: {
-    user () {
-      return this.$store.getters['users/userData']
-    }
+   ...mapGetters(
+      {      
+        user:'users/userData'
+      })
   }
 
 }

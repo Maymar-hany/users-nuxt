@@ -1,12 +1,28 @@
 <template>
   <div id="edit">
 
-    <button class="button is-primary"  @click="deleteUser(id)"> Delete User </button>
+
+    <div id="ID" :class="['modal', { 'is-active' : clicked }]">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title"> Delete User </p>
+      <button id="close" class="delete" aria-label="close"  @click="isClosed">  </button>
+    </header>
+<section class="modal-card-body">
+  <p> Are you sure you want to delete this user </p>
+<button  class="button is-dark"  @click="isClosed">No</button>
+<button  class="button is-danger" @click="deleteUser">Yes</button>
+
+    </section>
+
+  </div>
+</div>
   </div>
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'Delete',
   components: {
@@ -14,16 +30,36 @@ export default {
   },
   data () {
     return {
-
+    clicked: ''
     }
   },
   props: {
-    id: Number
+    id: ''
   },
   methods: {
-    deleteUser (user) {
-      this.$store.commit('users/DELETE_USER', user)
-    }
+    deleteUser () {
+      this.$store.commit('users/DELETE_USER', this.id)
+      this.$store.dispatch('users/openPage', !this.clicked)
+       this.$store.dispatch('notification/showMessage', 'Deleted successfully')
+      this.clicked=false
+    }, isClosed () {
+      this.$store.dispatch('users/openPage', !this.clicked)
+    },
+  }, computed: {
+
+    ...mapGetters(
+      {      
+        openPage:'users/openPage'
+      }
+    )
+  },
+  watch:{
+ 
+  openPage(newvalue){
+    this.clicked= newvalue
+     
+  }
+  
   }
 }
 </script>
