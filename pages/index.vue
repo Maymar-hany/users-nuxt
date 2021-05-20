@@ -87,10 +87,7 @@ export default {
   created () {
    
   },
-   mounted() {
-    this.$fbCustomerChat.setOptions({
-      theme_color: '#41B883'
-    })}
+  
 }
 </script>
 
