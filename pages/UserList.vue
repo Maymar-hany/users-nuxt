@@ -90,6 +90,10 @@ export default {
 
     }
   },
+   mounted() {
+    this.$fbCustomerChat.setOptions({
+      theme_color: '#41B883'
+    })},
   methods: {
     updatePage () {
       if (this.currentPage !== this.TotalPages) {
