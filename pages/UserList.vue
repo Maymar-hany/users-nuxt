@@ -92,7 +92,7 @@ export default {
   },
    mounted() {
     this.$fbCustomerChat.setOptions({
-      theme_color: '#41B883'
+      theme_color: '#f04e30'
     })},
   methods: {
     updatePage () {
